@@ -1,26 +1,38 @@
 #All questions must use a loop for full points.
-
-def oddNumbers(n:int) ->str:
-    """
-    Print out all odd numbers from 1 to n(inclusive) in a single string seperated by spaces.
-    example oddNumbers(5) -> "1 3 5"
-    example oddNumbers(8) -> "1 3 5 7"
-    example oddNumbers(-8) -> ""
-    """
+import random
 
 
-def backwards(n)-> int:
-    """
-    modify the below function such that it prints out all the numbers from n to 1
-    inclusive starting at n and counting down to 1
-    example backwards(5) -> "5 4 3 2 1"
-    example backwards(8) -> "8 7 6 5 4 3 2 1"
-    example backwards(-2) -> ""
-    """
+def oddNumbers(n):
+    if n < 1:
+        return ""
 
+    result = ""
+    # Loop through numbers from 1 to n
+    for i in range(1, n + 1, 1):
+        # Check if number is odd
+        if i % 2 == 1:
+            result += str(i) + " "
+    result = result.strip()
+    return result
+
+
+def backwards(n):
+    result = " "
+    for i in range(n, 0, -1):
+
+        result = result + str(i) + " "
+
+    result = result.strip()
+
+    return result
 
 
 def randomRepeating():
+    roll = random.randint(0,10)
+    tries =1
+    while roll <10:
+        tries = tries + 1
+    return "it took "+tries+"to get to a ten"
     """
     Print out a random number from 1-10 until you get a 10. Then print out how many
     times it took to roll a 10
@@ -30,21 +42,48 @@ def randomRepeating():
     tries = 0
     print(f"it took {tries} tries to get a 10")
 def randomRange(n):
-    """
-    Generate a random number from 1 to 100 n number of times. Then after that is
-    done print out what the highest number and the lowers number was from the rolled numbers.
-    NOTE: Given randomness no test for this question
-    :param n:
-    :return:
-    """
+    import random
+    # Generate first number to start
+    highest = random.randint(1, 100)
+    lowest = highest
+
+    for i in range(2, n + 1):
+        num = random.randint(1, 100)
+        print("Roll", i, ":", num)
+
+        if num > highest:
+            highest = num
+        if num < lowest:
+            lowest = num
+
+        return highest and lowest
+
+
 def reverse(word:str)->str:
     """
     Takes in a string as an argument and return the given string in reverse.
     example reverse("cat") -> "tac"
     example reverse("Hello") -> "olleH"
     """
+    reversed_word = ""
+    for char in word:
+        reversed_word = char + reversed_word
+    return reversed_word
+
+
 
 def fizzBuzzContinuous(n):
+    x = ""
+    for i in range(1,n+1,1):
+        if i%3==0 and i%5==0:
+           x = x + "fizzbuzz "
+        elif i % 3 == 0:
+            x = x + "fizz "
+        elif i%5 ==0:
+            x = x + "buzz "
+        else:
+             x = x + str(i)+" "
+    return x[:-1]
     """
     Modify the function such that it does the fizzbuzz operation on all numbers
     from 1 to n(inclusive).
@@ -60,29 +99,34 @@ def fizzBuzzContinuous(n):
     """
 
 def collatz(n):
-    """
-    Modify this function such that it mimics the collatz conjecture starting at n
-    and prints out each number.
-    The collatz conjecture is that if n is an even number divide it by 2. if n is
-    an odd number multiply it by 3 and add 1.
-    Repeat this process until n == 1.
-    :param n:
-    :return:
-    """
+    out = ""
+    while n != 1:
+        out += f"{n} "
+        if n %2 ==0:
+            n = n//2
+        else:
+            n = n*3 + 1
+    return out+ "1"
 
+print(collatz(15))
 
 def fibonacci(n):
-    """
-    for the given argument n print out the first n numbers of the fibonacci
-    sequence in a single string sperated by spaces.
-    The fibonacci sequence is defined as a sequence that starts with 0 then 1 as
-    the first two numbers. Every subsequent number is the prior two numbers added together.
-    Example fibonacci(6) -> "0 1 1 2 3 5"
-    Example fibonacci(10) -> "0 1 1 2 3 5 8 13 21 34"
-    Example fibonacci(1) -> "0"
-    :param n:
-    :return:
-    """
+    if n == 0:
+        return ""
+    if n == 1:
+        return "0"
+
+    result = "0 1"
+    prev = 0
+    current = 1
+
+    for i in range(2, n, 1):
+        next_num = prev + current
+        result += " " + str(next_num)
+        prev = current
+        current = next_num
+
+    return result
 
 
-print(fibonacci(300))
+#print(fibonacci(300))
